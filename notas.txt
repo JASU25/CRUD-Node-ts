@@ -1,0 +1,8 @@
+Instalacion de Typescript
+npm install typescript --save-dev
+npm install -g typescript
+npm i @types/node
+
+agregar al archivo package.json
+"tsc": "tsc", // dentro script
+npm run tsc -- --init
