@@ -4,15 +4,13 @@ import cors from "cors";
 import db from '../database/config';
 import MedicoRoutes from '../routes/medicos';
 import AuthRoutes from '../routes/auth';
-import EspecialidadRoutes from '../routes/especialidades';
 
 class Server{
     private app: Application;
     private port: number | string;
     private apiPaths = {
         medicos: '/api/medicos',
-        auth: '/api/auth',
-        especialidades: '/api/especialidades'
+        auth: '/api/auth'
     }
 
     constructor(){
@@ -47,7 +45,6 @@ class Server{
     routes(){
         this.app.use(this.apiPaths.medicos, MedicoRoutes);
         this.app.use(this.apiPaths.auth, AuthRoutes);
-        this.app.use(this.apiPaths.especialidades, EspecialidadRoutes);
     }
 
     listen(){

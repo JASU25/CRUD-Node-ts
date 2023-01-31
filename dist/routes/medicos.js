@@ -13,7 +13,7 @@ router.post('/', [
     (0, express_validator_1.check)('sexo').isIn(['F', 'M']),
     (0, express_validator_1.check)('activo', 'El nombre es obligatorio').isBoolean(),
     (0, express_validator_1.check)('cedula', 'La cedula es obligatorio').not().isEmpty(),
-    (0, express_validator_1.check)('especialidad', 'La especialidad es obligatorio').isString().not().isEmpty().isLength({ min: 6 }),
+    (0, express_validator_1.check)('idEspecialidad', 'La idEspecialidad es obligatorio').isInt(),
     middlewares_1.validarPassword,
     middlewares_1.validarCampos
 ], medicos_1.medicoPost);

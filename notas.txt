@@ -6,3 +6,8 @@ npm i @types/node
 agregar al archivo package.json
 "tsc": "tsc", // dentro script
 npm run tsc -- --init
+
+
+
+tsc
+nodemon dist/app

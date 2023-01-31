@@ -1,12 +1,11 @@
 import {Response, Request} from 'express';
 import Medicos from '../models/medicos';
 import  bycrypjs from 'bcryptjs';
-import Especialidades from '../models/especialidades';
 
 
 export const medicoGet = async(req:Request, res:Response)=>{
     try{
-        const medico =  await Medicos.findAll({where:{activo : true},include:{model: Especialidades ,attributes:["nombreEspecialidad"]}})
+        const medico =  await Medicos.findAll({where:{activo : true}})
         res.json({medico});
     }catch(error){
         console.log(error);
@@ -34,12 +33,12 @@ export const medicoIdGet = async(req:Request, res:Response)=>{
 export const medicoPost = async(req:Request, res:Response)=>{
 
     try{
-      const {nombres,apellidos,correo,sexo,activo,cedula,idEspecialidad} = req.body;
+      const {nombres,apellidos,correo,sexo,activo,cedula,especialidad} = req.body;
       let {password} = req.body;
         //Encriptar la contraseña
         const salt = bycrypjs.genSaltSync();
         password= bycrypjs.hashSync(password, salt);
-      const medico = new Medicos({nombres,apellidos,correo,password,sexo,activo,cedula,idEspecialidad});
+      const medico = new Medicos({nombres,apellidos,correo,password,sexo,activo,cedula,especialidad});
       
         //Guardar en BD
         await medico.save();
@@ -104,9 +103,9 @@ export const medicoActivo = async(req:Request, res:Response) => {
 
 export const medicoPut = async(req:Request, res:Response) => {
     const {id} = req.params;
-    const {nombres ,apellidos,activo,idEspecialidad,cedula} = req.body;
+    const {nombres ,apellidos,activo,especialidad,cedula} = req.body;
     try{
-        const medico = await Medicos.update({nombres,apellidos,activo,idEspecialidad,cedula}, {
+        const medico = await Medicos.update({nombres,apellidos,activo,especialidad,cedula}, {
             where: {
             idMedico: id
             }
